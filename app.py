@@ -21,10 +21,10 @@ import pandas as pd
 import plotly.express as px
 from plotly.offline import plot
 import plotly.graph_objs as go
-import dash_core_components as dcc
-import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+from dash import dcc
+from dash import html
 
 data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',')
 
