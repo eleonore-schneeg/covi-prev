@@ -42,6 +42,7 @@ line_graph_anxiety = px.line(
 #plot(line_graph_anxiety)
 
 
+
 # DEPRESSION
 
 # Create the line graph
