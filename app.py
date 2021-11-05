@@ -23,7 +23,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.express as px
 
-data = pd.read_csv('/Users/eleonore/OneDrive - Imperial College London/Health Data Today/Data/France//CoviPrev/coviprev-age.csv',sep=';',decimal=',')
+data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',')
 
 
 # ANXIETY
@@ -86,7 +86,7 @@ line_graph_sleep = px.line(
 #plot(line_graph_sleep)
 
 #SEX
-data_sex = pd.read_csv('/Users/eleonore/OneDrive - Imperial College London/Health Data Today/Data/France//CoviPrev/coviprev-sexe.csv',sep=';',decimal=',')
+data_sex = pd.read_csv('data/coviprev-sexe.csv',sep=';',decimal=',')
 # Create the line graph
 line_graph_sex= px.line(
   # Set the appropriate DataFrame and title
