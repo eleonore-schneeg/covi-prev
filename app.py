@@ -147,7 +147,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},className=
     html.Div(id='my-output')
 ])
 
-
+server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
