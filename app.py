@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -14,15 +15,13 @@ Created on Fri Oct 22 14:45:44 2021
 
 @author: eleonore
 """
+import os
 
-
-import pandas as pd
-import plotly.express as px
-from plotly.offline import plot
-import plotly.graph_objs as go
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+import pandas as pd
+import plotly.express as px
 
 data = pd.read_csv('/Users/eleonore/OneDrive - Imperial College London/Health Data Today/Data/France//CoviPrev/coviprev-age.csv',sep=';',decimal=',')
 
@@ -119,12 +118,6 @@ picker_style = {'float': 'left', 'margin': 'auto'}
 #APP#
 #####
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import plotly.express as px
-import pandas as pd
-import dash_bootstrap_components as dbc
 
 
 colors = {
