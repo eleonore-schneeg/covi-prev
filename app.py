@@ -34,7 +34,7 @@ data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',')
 # Create the line graph
 line_graph_anxiety = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data[5:79], title='Evolution anxiete par age', 
+  data_frame=data[5:79], title='Évolution anxiete par age', 
   # Set the x and y arguments
   x='semaine', y='depression', 
   # Ensure a separate line per country
@@ -49,15 +49,16 @@ line_graph_anxiety = px.line(
 # Create the line graph
 line_graph_depression = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data[5:79], title='Evolution de symptômes dépressifs par âge durant les vagues Covid', 
+  data_frame=data[5:79], title='Évolution de symptômes dépressifs par âge durant les vagues Covid', 
   # Set the x and y arguments
   x='semaine', y='depression', 
   # Ensure a separate line per age
   color='age',
-  labels={
+  labels={'age':"Tranche d'âge",
                      "semaine": "Vague",
                      "depression": "% d'individus déclarant des symptômes dépressifs"
                  })
+
 
 line_graph_depression.update_yaxes(range=[0, 40])
 
@@ -83,7 +84,7 @@ picker_style = {'float': 'left', 'margin': 'auto'}
 # Create the line graph
 line_graph_sleep = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data[5:79], title='Evolution problèmes de sommeil par age', 
+  data_frame=data[5:79], title='Évolution problèmes de sommeil par age', 
   # Set the x and y arguments
   x='semaine', y='pbsommeil', 
   # Ensure a separate line per country
@@ -97,8 +98,10 @@ line_graph_sleep.update_layout(
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=10,
-    plot_bgcolor='#ffffff'
+    plot_bgcolor='#ffffff',
+    yaxis_range=[0,100]
 )
+
 
 
 #plot(line_graph_sleep)
@@ -122,14 +125,17 @@ line_graph_sex_sommeil.update_layout(
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=10,
-    plot_bgcolor='#ffffff'
+    plot_bgcolor='#ffffff',
+        yaxis_range=[0,100]
 )
 
 line_graph_sex_depression= px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data_sex[0:32], title='Evolution problèmes de dépression par sexe', 
+  data_frame=data_sex[0:32], title='Évolution problèmes de dépression par sexe', 
   # Set the x and y arguments
   x='semaine', y='depression', 
+  labels={
+                    'age':"Tranche d'âge"},
   # Ensure a separate line per country
   color='sexe')
 
@@ -141,7 +147,8 @@ line_graph_sex_depression.update_layout(
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=10,
-    plot_bgcolor='#ffffff'
+    plot_bgcolor='#ffffff',
+        yaxis_range=[0,100]
 )
 
 
@@ -155,20 +162,57 @@ all_data = pd.read_csv('data/coviprev.csv',
 
 fig_all = px.line(all_data, x='semaine', y=['depression', 'anxiete',"pbsommeil"],
                     labels={
+                    'variable':'Indicateurs',
                      "semaine": "Vague",
-                     "depression": "% d'individus déclarant des symptômes"
+                     "value": "% d'individus déclarant des symptômes"
                  })
 
 fig_all.update_layout(
     font_family="Arial",
     font_color="darkblue",
-    title_font_family="Arial",
+    title_font_family="Droid Sans",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=10,
-    plot_bgcolor='#ffffff'
+    plot_bgcolor='#ffffff',
 )
-picker_style = {'float': 'left', 'margin': 'auto'}
+
+fig_all.update_layout(legend=dict(
+    orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
+fig_all.add_hline(y=20, line_dash="dot",
+              annotation_text="Jan 1, 2018 baseline", 
+              annotation_position="bottom right",line_color='blue')
+fig_all.add_hline(y=25, line_dash="dot",
+              annotation_text="Jan 1, 2018 baseline", 
+              annotation_position="bottom right",line_color='red')
+
+fig_all.add_hline(y=60, line_dash="dot",
+              annotation_text="Jan 1, 2018 baseline", 
+              annotation_position="bottom right", line_color='green')
+
+
+confinement_1=[	'Vague 1 : 23-25 mars',	'Vague 7 : 13-15 mai']
+confinement_2=[	'Vague 17 : 4-6 nov',	'Vague 19 : 14-16 dec']
+confinement_3=[	'Vague 22 : 15-17 mars',	'Vague 24 : 17-19 mai']
+
+fig_all.add_vrect(x0='Vague 1 : 23-25 mars', x1='Vague 7 : 13-15 mai', 
+              annotation_text="Confinement 1", annotation_position="top left",
+              fillcolor="blue", opacity=0.1, line_width=0)
+
+fig_all.add_vrect(x0='Vague 17 : 4-6 nov', x1='Vague 19 : 14-16 dec..', 
+              annotation_text="Confinement 2", annotation_position="top left",
+              fillcolor="blue", opacity=0.1, line_width=0)
+
+fig_all.add_vrect(x0='Vague 22 : 15-17 mars', x1='Vague 24 : 17-19 mai', 
+              annotation_text="Confinement 3", annotation_position="top left",
+              fillcolor="blue", opacity=0.1, line_width=0)
+
 
 
 #######
@@ -264,10 +308,10 @@ html.Div([dcc.Markdown('''
 * Échantillonnage par quotas (sexe, âge, catégorie socio-professionnelles du répondant, région, catégorie d’agglomération) redressé sur le recensement général de la population 2016 
 
 
-''', style={'textAlign':'left','margin-left': 100,'width': '80%'} ),
+''', style={'textAlign':'left','margin-left': 90,'width': '80%'} ),
                  dcc.Graph(id='bargraph',
                          figure=fig_all,
-                             style={'textAlign':'center','margin-left': 100,'width': '80%'}),
+                             style={'textAlign':'center','margin-left': 100,'width': '90%'}),
                 ])]
                        
                                
