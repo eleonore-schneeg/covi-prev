@@ -25,6 +25,7 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
+import plotly.graph_objs as go
 
 data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',')
 
@@ -173,7 +174,7 @@ picker_style = {'float': 'left', 'margin': 'auto'}
 #######
 
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MINTY])
 
 
 server = app.server
@@ -235,7 +236,7 @@ def render_page_content(pathname):
                         style={'textAlign':'center'}),
                 html.Div([
     dcc.Markdown('''
-#### Dashboard CoviPrev 📈
+#### Dashboard #1 CoviPrev 📈
 
 **Une enquête pour suivre l’évolution des comportements et de la santé mentale pendant l'épidémie de COVID-19**
 >
@@ -265,8 +266,11 @@ html.Div([dcc.Markdown('''
 
 ''', style={'textAlign':'left','margin-left': 100,'width': '80%'} ),
                  dcc.Graph(id='bargraph',
-                         figure=fig_all,style={'textAlign':'center','margin-left': 100,'width': '80%'}),
+                         figure=fig_all,
+                             style={'textAlign':'center','margin-left': 100,'width': '80%'}),
                 ])]
+                       
+                               
     elif pathname == "/page-1":
         return [
                 html.H1('Données relatives aux signes dépressifs',
