@@ -40,7 +40,7 @@ from urllib.request import urlopen
 
 
 
-data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',', encoding= 'unicode_escape')
+data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',', encoding='utf-8')
 
 
 # ANXIETY
@@ -193,7 +193,7 @@ line_graph_sleep.add_annotation(dict(font=dict(color="black",size=10),
 #plot(line_graph_sleep)
 
 #SEX
-data_sex = pd.read_csv('data/coviprev-sexe.csv',sep=';',decimal=',',encoding= 'unicode_escape')
+data_sex = pd.read_csv('data/coviprev-sexe.csv',sep=';',decimal=',',encoding='utf-8')
 # Create the line graph
 line_graph_sex_sommeil= px.line(
   # Set the appropriate DataFrame and title
@@ -335,7 +335,7 @@ line_graph_sex_anxiete.add_annotation(dict(font=dict(color="black",size=10),
 
 all_data = pd.read_csv('data/coviprev.csv',
                        sep=';',decimal=',',header= 0,
-                        encoding= 'unicode_escape')
+                        encoding='utf-8')
 
 
 fig_all = px.line(all_data, x='semaine', y=['depression', 'anxiete',"pbsommeil"],
@@ -418,9 +418,9 @@ fig_all.add_annotation(dict(font=dict(color="black",size=10),
 
 
 
-region = pd.read_csv('data/coviprev-region.csv',sep=';',decimal=',', encoding= 'unicode_escape')
+region = pd.read_csv('data/coviprev-region.csv',sep=';',decimal=',', encoding='utf-8')
 
-codes = pd.read_csv('data/metadata.csv',sep=';',decimal=',', encoding= 'unicode_escape')
+codes = pd.read_csv('data/metadata.csv',sep=';',decimal=',', encoding='utf-8')
 codes = codes.rename(columns={'Code': 'reg'})
 df= region.merge(codes, how='inner')
 
