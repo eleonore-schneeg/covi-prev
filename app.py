@@ -40,7 +40,7 @@ from urllib.request import urlopen
 
 
 
-data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',')
+data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',', encoding= 'unicode_escape')
 
 
 # ANXIETY
@@ -193,7 +193,7 @@ line_graph_sleep.add_annotation(dict(font=dict(color="black",size=10),
 #plot(line_graph_sleep)
 
 #SEX
-data_sex = pd.read_csv('data/coviprev-sexe.csv',sep=';',decimal=',')
+data_sex = pd.read_csv('data/coviprev-sexe.csv',sep=';',decimal=',',encoding= 'unicode_escape')
 # Create the line graph
 line_graph_sex_sommeil= px.line(
   # Set the appropriate DataFrame and title
@@ -418,9 +418,9 @@ fig_all.add_annotation(dict(font=dict(color="black",size=10),
 
 
 
-region = pd.read_csv('data/coviprev-region.csv',sep=';',decimal=',')
+region = pd.read_csv('data/coviprev-region.csv',sep=';',decimal=',', encoding= 'unicode_escape')
 
-codes = pd.read_csv('data/metadata.csv',sep=';',decimal=',')
+codes = pd.read_csv('data/metadata.csv',sep=';',decimal=',', encoding= 'unicode_escape')
 codes = codes.rename(columns={'Code': 'reg'})
 df= region.merge(codes, how='inner')
 
