@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 18 15:56:48 2021
-
-@author: eleonore
-"""
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
 Created on Wed Nov 17 18:50:14 2021
 
 @author: eleonore
@@ -478,30 +470,29 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
-
-
 sidebar = html.Div(
     [
-        html.H1("Hippo", className="navbar-title"),
-        html.H5("Santé Mentale 🐼", className="navbar-subtitle"),
+        html.H5("CoviPrev", className="display-4"),
+        html.Hr(),
+        html.P(
+            "Santé Mentale 🐼 ", className="lead"
+        ),
         dbc.Nav(
             [
-                dbc.NavLink("Accueil", href="/", active="exact",className="button"),
-                dbc.NavLink("Anxiété", href="/page-0", active="exact",className="button"),
-                dbc.NavLink("Dépression", href="/page-1", active="exact",className="button"),
-                dbc.NavLink("Sommeil", href="/page-2", active="exact",className="button"),
-                dbc.NavLink("Carte", href="/page-3", active="exact",className="button"),
+                dbc.NavLink("Accueil", href="/", active="exact"),
+                dbc.NavLink("Anxiété", href="/page-0", active="exact"),
+                dbc.NavLink("Dépression", href="/page-1", active="exact"),
+                dbc.NavLink("Sommeil", href="/page-2", active="exact"),
+                dbc.NavLink("Carte", href="/page-3", active="exact"),
             ],
             vertical=True,
             pills=True,
-            className="summary-navbar",
         ),
     ],
-    className="navbar",
+    style=SIDEBAR_STYLE,
 )
 
-
-content = html.Div(id="page-content", children=[], className="content")
+content = html.Div(id="page-content", children=[], style=CONTENT_STYLE)
 
 app.layout = html.Div([
     dcc.Location(id="url"),
@@ -517,7 +508,8 @@ app.layout = html.Div([
 def render_page_content(pathname):
     if pathname == "/":
         return [
-                html.H1('Dashboard #1 CoviPrev 📈',className="content-title"),
+                html.H1('Dashboard #1 CoviPrev 📈',
+                        style={'textAlign':'center','margin-bottom':50}),
                 html.Div([
     dcc.Markdown('''
 #### Une enquête pour suivre l’évolution des comportements et de la santé mentale pendant l'épidémie de COVID-19
@@ -525,7 +517,7 @@ def render_page_content(pathname):
 > Depuis le 23 mars 2020, Santé publique France a lancé l'enquête CoviPrev en population générale afin de suivre l’évolution des comportements (gestes barrières, confinement, consommation d’alcool et de tabac, alimentation et activité physique) et de la santé mentale (bien-être, troubles).
 >
 _Source de l'enquête [suivant ce lien](https://www.santepubliquefrance.fr/etudes-et-enquetes/coviprev-une-enquete-pour-suivre-l-evolution-des-comportements-et-de-la-sante-mentale-pendant-l-epidemie-de-covid-19)._
-''', className="content-warning")]),
+''', style={'textAlign':'left','margin-left': 100,'width': '80%', 'margin-bottom':50} )]),
  
 html.Div([dcc.Markdown('''
 #### Objectifs ✔️
@@ -533,7 +525,7 @@ html.Div([dcc.Markdown('''
 * Recueillir les informations nécessaires à l’orientation et à l’ajustement des mesures de prévention
 * Surveiller les inégalités de santé
 * Capitaliser des connaissances utiles à la gestion de futures pandémies  
-''', className='box')]),
+''', style={'textAlign':'left','margin-left': 100,'width': '80%','margin-bottom':50} )]),
 
 html.Div([dcc.Markdown('''
 #### Méthodes 💡
@@ -541,7 +533,7 @@ html.Div([dcc.Markdown('''
 * Questionnaires auto-administrés à remplir en ligne sur système Cawi (Computer Assisted Web Interview)
 * Echantillons de 2 000 personnes de 18 ans et plus résidant en France métropolitaine recrutés par access panel (Access Panel BVA)
 * Échantillonnage par quotas (sexe, âge, catégorie socio-professionnelles du répondant, région, catégorie d’agglomération) redressé sur le recensement général de la population 2016 
-''', className='box'),
+''', style={'textAlign':'left','margin-left': 100,'margin-bottom':50} ),
                  # dcc.Graph(id='bargraph0',
                  #         figure=fig_all,
                  #             style={'textAlign':'center','margin-left': 80,'width': '90%'}),
@@ -550,45 +542,41 @@ html.Div([dcc.Markdown('''
     elif pathname == "/page-0":
         return [
                 html.H2("Prévalences de l'anxiété dans le contexte de l’épidémie de Covid-19",
-                        className="content-title"),
+                        style={'textAlign':'center','margin-left': 100, 'margin-bottom':50}),
                 html.Div([
-                dcc.Markdown(''' _L’anxiété est mesurée par l’échelle HAD (Hospitality Anxiety and D
-                             epression scale ; score > 10)._''',className='content-paraf')]),
+                dcc.Markdown(''' _L’anxiété est mesurée par l’échelle HAD (Hospitality Anxiety and Depression scale ; score > 10)._''', style={'textAlign':'left','margin-left': 100,'width': '80%'} ),
                 dcc.Graph(id='bargraph1',
-                         figure=line_graph_anxiety,className="content-graph"),
+                         figure=line_graph_anxiety,style={'textAlign':'center','margin-left': 80,'width': '90%'}),
                 dcc.Graph(id='bargraph2',
-                         figure=line_graph_sex_anxiete,className="content-graph")
-                
+                         figure=line_graph_sex_anxiete,style={'textAlign':'center','margin-left': 80,'width': '90%'})
+                ])
                 ]    
                          
     elif pathname == "/page-1":
         return [
                 html.H2('Prévalences de la dépression dans le contexte de l’épidémie de Covid-19',
-                        className="content-title"),
-                dcc.Markdown(''' _La dépression est mesurée par l’échelle HAD (Hospitality Anxiety 
-                             and Depression scale ; score > 10._''', className='content-paraf'),
+                        style={'textAlign':'center','margin-left': 100, 'margin-bottom':50}),
+                dcc.Markdown(''' _La dépression est mesurée par l’échelle HAD (Hospitality Anxiety and Depression scale ; score > 10._''', style={'textAlign':'left','margin-left': 100,'width': '80%'} ),
                 dcc.Graph(id='bargraph1',
-                         figure=line_graph_depression,className="content-graph"),
+                         figure=line_graph_depression,style={'textAlign':'center','margin-left': 80,'width': '90%'}),
                 dcc.Graph(id='bargraph2',
-                         figure=line_graph_sex_depression,className="content-graph")
+                         figure=line_graph_sex_depression,style={'textAlign':'center','margin-left': 80,'width': '90%'})
                 ]
     elif pathname == "/page-2":
         return [
                 html.H2('Prévalences des problèmes de sommeil dans le contexte de l’épidémie de Covid-19',
-                        className="content-title"),
-                dcc.Markdown('''_La question posée était « Diriez-vous qu’au cours des 8 derniers jours, 
-                             vous avez eu des problèmes de sommeil… ? ». Les personnes ayant répondu "un peu" 
-                             ou "beaucoup" à la question ont été considérées 
-                             comme ayant des problèmes de sommeil._''', className='content-paraf'),
+                        style={'textAlign':'center','margin-left': 100,'margin-bottom':50}),
+                html.H1('   '),
+                dcc.Markdown('''_La question posée était « Diriez-vous qu’au cours des 8 derniers jours, vous avez eu des problèmes de sommeil… ? ». Les personnes ayant répondu "un peu" ou "beaucoup" à la question ont été considérées comme ayant des problèmes de sommeil._''', style={'textAlign':'left','margin-left': 100,'width': '80%'} ),
                 dcc.Graph(id='bargraph3',
-                         figure=line_graph_sleep,className="content-graph"),
+                         figure=line_graph_sleep,style={'textAlign':'center','margin-left': 80,'width': '90%'}),
                 dcc.Graph(id='bargraph4',
-                         figure=line_graph_sex_sommeil,className="content-graph")
+                         figure=line_graph_sex_sommeil,style={'textAlign':'center','margin-left': 80,'width': '90%'})
                 ]
     elif pathname == "/page-3":
         return [
-                html.H2('Indicateurs de santé mentale par région dans le contexte de l’épidémie de Covid-19', className="content-title"),
-                 html.H4('Varier la période 🗓 :', className='content-paraf'),
+                html.H2('Indicateurs de santé mentale par région dans le contexte de l’épidémie de Covid-19', style={'textAlign':'center','margin-left': 80,'width': '90%','margin-bottom':50}),
+                 html.H4('Varier la période 🗓 :', style={'textAlign':'left','margin-left': 100}),
                 dcc.Dropdown(
         id='demo-dropdown',
         options=[{"label": '23-25 mars 2020', "value": 1},
@@ -622,12 +610,12 @@ html.Div([dcc.Markdown('''
 
                 value=1,
                 placeholder='Select date',
-         style = {"width": "200px",'position': 'center','margin-left': 10}
+         style = {"width": "200px",'position': 'center','margin-left': 50}
          ),
                 html.Div([
-    dcc.Graph(id='graph-with-slider',className="content-graph"),
-    dcc.Graph(id='graph-with-slider2', className="content-graph"),
-    dcc.Graph(id='graph-with-slider3', className="content-graph")
+    dcc.Graph(id='graph-with-slider', style={'textAlign':'center','margin-left': 100,'width': '80%'}),
+    dcc.Graph(id='graph-with-slider2', style={'textAlign':'center','margin-left': 100,'width': '80%'}),
+    dcc.Graph(id='graph-with-slider3', style={'textAlign':'center','margin-left': 100,'width': '80%'})
 
 ]),
 
