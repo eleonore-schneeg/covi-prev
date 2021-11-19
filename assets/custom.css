@@ -21,7 +21,7 @@ font-family: 'Raleway',Arial;
 }
 
 .navbar-title {
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: Bold 700;
   font-weight: bold;
   font-size: 38px;
@@ -37,7 +37,7 @@ font-family: 'Raleway',Arial;
   position: absolute;
   top: 143px;
   padding-left: 25px;
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -53,7 +53,7 @@ font-family: 'Raleway',Arial;
 }
 
 .text-navbar {
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -74,7 +74,7 @@ font-family: 'Raleway',Arial;
 .content-title {
   margin-left: 20px;
   width: 600px;
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
@@ -89,7 +89,7 @@ font-family: 'Raleway',Arial;
   margin-left: 20px;
   margin-top: 20px;
   width: 600px;
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -103,7 +103,7 @@ font-family: 'Raleway',Arial;
   padding: 8px;
   padding-left: 15px;
   border: 14px 0px 0px 0px solid purple;
-  font-family: Raleway;
+  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
