@@ -4,7 +4,7 @@
 }
 
 *{
-font-family: 'Raleway';
+font-family: 'Raleway',Arial;
 }
 
 .navbar {
@@ -162,4 +162,11 @@ font-family: 'Raleway';
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
     background-color: #f1effd;
+}
+
+.js-plotly-plot .plotly, .js-plotly-plot .plotly div {
+    direction: ltr;
+    font-family: "Courier New, monospace";
+    margin: 0px;
+    padding: 0px;
 }
