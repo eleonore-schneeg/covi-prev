@@ -24,7 +24,6 @@ a {
 }
 
 .navbar-title {
-  font-family: Raleway,Arial;
   font-style: Bold 700;
   font-weight: bold;
   font-size: 13;
@@ -40,7 +39,6 @@ a {
   position: absolute;
   top: 143px;
   padding-left: 25px;
-  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -56,7 +54,6 @@ a {
 }
 
 .text-navbar {
-  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -78,7 +75,6 @@ a {
 .content-title {
   padding-top:2rem;
   width: 600px;
-  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: bold;
   font-size: calc(30px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
@@ -93,7 +89,6 @@ a {
   margin-left: 10px;
   margin-top: 20px;
   width: 600px;
-  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -107,7 +102,6 @@ a {
   padding: 8px;
   padding-left: 15px;
   border: 14px 0px 0px 0px solid purple;
-  font-family: Raleway,Arial;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -189,10 +183,11 @@ a {
 
 .js-plotly-plot .plotly, .js-plotly-plot .plotly div {
     direction: ltr;
-    font-family: "Courier New, monospace";
+    font-family: Arial;
     margin: 0px;
     padding: 0px;
 }
+
 
 
 
