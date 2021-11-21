@@ -4,7 +4,7 @@ font-family: 'Uber Move Medium', sans-serif;
 font-size: 13;
 }
 
-body { font-family: 'Uber Move Medium'; }
+body { font-family: 'Uber Move Medium', sans-serif; }
 
 a {
   color: #ce8bf8;
@@ -122,7 +122,25 @@ a {
   margin-right: 52px;
   font-style: normal;
   font-weight: bold;
+  font-size: 20px
 
+}
+
+.js-plotly-plot .plotly div {
+    direction: ltr;
+    font-family: 'Uber Move Medium', verdana, arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.div {
+    font-family: 'Uber Move Medium';
+    font-size: 17px;
+    fill: rgb(0, 0, 139);
+    opacity: 1;
+    font-weight: normal;
+    white-space: pre;
 }
 
 .content-button {

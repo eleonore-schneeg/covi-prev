@@ -72,6 +72,7 @@ line_graph_anxiety = px.line(
 line_graph_anxiety.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -121,6 +122,7 @@ line_graph_depression.update_yaxes(range=[0, 40])
 line_graph_depression.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -168,6 +170,7 @@ line_graph_sleep = px.line(
 line_graph_sleep.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -219,6 +222,7 @@ line_graph_sex_sommeil= px.line(
 line_graph_sex_sommeil.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -263,6 +267,7 @@ line_graph_sex_depression= px.line(
 line_graph_sex_depression.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -306,6 +311,7 @@ line_graph_sex_anxiete= px.line(
 line_graph_sex_anxiete.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -656,6 +662,7 @@ def update_figure(value):
         'yanchor': 'top'},
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue"
     )
     
@@ -700,6 +707,7 @@ def update_figure(value):
     },
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",)
 
     fig2.add_annotation(dict(font=dict(color="black",size=10),
@@ -743,6 +751,7 @@ def update_figure(value):
     },
     font_color="darkblue",
     title_font_color="darkblue",
+    font_family="Uber Move Medium",
     legend_title_font_color="darkblue",
 )
     fig3.add_annotation(dict(font=dict(color="black",size=10),
