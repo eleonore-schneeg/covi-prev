@@ -4,8 +4,15 @@
 }
 
 *{
-font-family: 'Raleway',Arial;
+font-family: 'Raleway', sans-serif;
+font-size: 13;
 }
+
+a {
+  color: #ce8bf8;
+}
+
+
 
 .navbar {
   position: fixed;
@@ -13,7 +20,7 @@ font-family: 'Raleway',Arial;
   border: 14px solid #f1effd;
   border-radius: 20px;
   padding: 14px;
-  width: 280px;
+  width: 14.5rem;
   top: 0;
   bottom: 0;
   margin-left: -20px;
@@ -24,7 +31,7 @@ font-family: 'Raleway',Arial;
   font-family: Raleway,Arial;
   font-style: Bold 700;
   font-weight: bold;
-  font-size: 38px;
+  font-size: 13;
   line-height: 46px;
   display: flex;
   color: black;
@@ -56,28 +63,29 @@ font-family: 'Raleway',Arial;
   font-family: Raleway,Arial;
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
   line-height: 24px;
   display: flex;
   align-items: center;
   color: #959ea3;
   padding-left: 15px;
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .content {
   background: #ffffff;
-  margin-left: 18rem;
-  margin-right: 2rem;
-  padding: 2rem 1rem;
+  padding-left: 15rem;
+  padding-right: 1.8rem;
+  padding-top: 0.5%;
+  padding-bottom:3%
 }
 
 .content-title {
-  margin-left: 20px;
+  padding-top:2rem;
   width: 600px;
   font-family: Raleway,Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
+  font-size: calc(30px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   line-height: 81px;
   line-height: 1.2;
   display: flex;
@@ -86,7 +94,7 @@ font-family: 'Raleway',Arial;
 }
 
 .content-paraf {
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 20px;
   width: 600px;
   font-family: Raleway,Arial;
@@ -99,7 +107,7 @@ font-family: 'Raleway',Arial;
 
 .content-warning {
   background: #f1effd;
-  margin-left: 20px;
+  padding-left: 15rem;
   padding: 8px;
   padding-left: 15px;
   border: 14px 0px 0px 0px solid purple;
@@ -112,13 +120,15 @@ font-family: 'Raleway',Arial;
 }
 
 .content-graph {
-  margin-left: 20px;
-  padding: 10px;
+  padding-left: 15rem;
+  padding: 50px;
   border: 1px solid #ce8bf8;
   box-shadow: 6px 5px 21px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   background: white;
   margin-top: 52px;
+  margin-left: 52px;
+  margin-right: 52px;
   font-style: normal;
   font-weight: bold;
 
@@ -135,15 +145,32 @@ font-family: 'Raleway',Arial;
 }
 
 
-.box {
-  margin-left: 150px;
-  margin-right: 150px;
+.box-left {
   padding: 30px;
   border: 1px solid #ce8bf8;
   box-shadow: 6px 5px 21px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   background: white;
   margin-top: 52px;
+  column-count: 2
+}
+
+.box {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 30px;
+  border: 1px solid 	#F5F5F5;
+  box-shadow: 6px 5px 21px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  background: white;
+  margin-top: 52px;
+  vertical-align: top;
+}
+
+.test {
+  display: inline-block;
+  font-size: 20px;
+  padding: 20px;
 }
 
 .button {
@@ -169,4 +196,10 @@ font-family: 'Raleway',Arial;
     font-family: "Courier New, monospace";
     margin: 0px;
     padding: 0px;
+}
+
+
+
+.textpoint{
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
