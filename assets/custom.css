@@ -4,14 +4,11 @@ font-family: 'Uber Move Medium', sans-serif;
 font-size: 13;
 }
 
-.xaxis titlefont {
-  font-family: "Roboto", Arial !important;
-}
+body { font-family: 'Uber Move Medium'; }
 
 a {
   color: #ce8bf8;
 }
-
 
 
 .navbar {
@@ -73,7 +70,7 @@ a {
   padding-left: 15rem;
   padding-right: 1.8rem;
   padding-top: 0.5%;
-  padding-bottom:3%
+  padding-bottom:3%;
 }
 
 .content-title {
@@ -159,6 +156,7 @@ a {
   background: white;
   margin-top: 52px;
   vertical-align: top;
+  font: inherit;
 }
 
 .test {

@@ -70,9 +70,7 @@ line_graph_anxiety = px.line(
 
 
 line_graph_anxiety.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -85,7 +83,7 @@ line_graph_anxiety.update_layout(
         'yanchor': 'top'
     },
 )
-line_graph_anxiety.update_xaxes(title_font_family="Raleway")
+
 picker_style = {'float': 'left', 'margin': 'auto'}
 
 line_graph_anxiety.add_annotation(dict(font=dict(color="black",size=10),
@@ -121,9 +119,7 @@ line_graph_depression = px.line(
 line_graph_depression.update_yaxes(range=[0, 40])
 
 line_graph_depression.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family='Raleway',
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -136,7 +132,7 @@ line_graph_depression.update_layout(
         'yanchor': 'top'
     },
 )
-line_graph_depression.update_xaxes(title_font_family='Raleway')
+
 picker_style = {'float': 'left', 'margin': 'auto'}
 
 line_graph_depression.add_annotation(dict(font=dict(color="black",size=10),
@@ -170,9 +166,7 @@ line_graph_sleep = px.line(
 
 
 line_graph_sleep.update_layout(
-    font_family='Raleway',
     font_color="darkblue",
-    title_font_family='Raleway',
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -223,9 +217,7 @@ line_graph_sex_sommeil= px.line(
 
 
 line_graph_sex_sommeil.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -269,9 +261,7 @@ line_graph_sex_depression= px.line(
 
 
 line_graph_sex_depression.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -314,9 +304,7 @@ line_graph_sex_anxiete= px.line(
 
 
 line_graph_sex_anxiete.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -363,9 +351,7 @@ fig_all = px.line(all_data, x='semaine', y=['depression', 'anxiete',"pbsommeil"]
                     color_discrete_sequence= px.colors.sequential.Agsunset)
 
 fig_all.update_layout(
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -457,7 +443,7 @@ app = dash.Dash(__name__,external_stylesheets = [dbc.themes.BOOTSTRAP], suppress
                 title='Dashboard #1',
                 update_title='Loading healthcare data...')
 
-
+app.css.config.serve_locally = True
 #external_stylesheets=[dbc.themes.BOOTSTRAP]
 #['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -668,9 +654,7 @@ def update_figure(value):
         'x':0.5,
         'xanchor': 'center',
         'yanchor': 'top'},
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue"
     )
@@ -714,9 +698,7 @@ def update_figure(value):
         'xanchor': 'center',
         'yanchor': 'top'
     },
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",)
 
@@ -759,9 +741,7 @@ def update_figure(value):
         'xanchor': 'center',
         'yanchor': 'top'
     },
-    font_family="Raleway",
     font_color="darkblue",
-    title_font_family="Raleway",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
 )
