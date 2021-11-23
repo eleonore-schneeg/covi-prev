@@ -99,6 +99,10 @@ line_graph_anxiety.add_annotation(dict(font=dict(color="black",size=10),
 
 
 
+confinement_1=[	'Vague 1 : 23-25 mars',	'Vague 7 : 13-15 mai']
+confinement_2=[	'Vague 17 : 4-6 nov',	'Vague 19 : 14-16 dec']
+confinement_3=[	'Vague 22 : 15-17 mars',	'Vague 24 : 17-19 mai']
+
 # DEPRESSION
 
 # Create the line graph
@@ -390,9 +394,6 @@ fig_all.add_hline(y=60, line_dash="dot",
               annotation_position="bottom right", line_color='rgb(192, 54, 157)', line_width=0.5)
 
 
-confinement_1=[	'Vague 1 : 23-25 mars',	'Vague 7 : 13-15 mai']
-confinement_2=[	'Vague 17 : 4-6 nov',	'Vague 19 : 14-16 dec']
-confinement_3=[	'Vague 22 : 15-17 mars',	'Vague 24 : 17-19 mai']
 
 fig_all.add_vrect(x0='Vague 1 : 23-25 mars', x1='Vague 7 : 13-15 mai', 
               annotation_text="Confinement 1", annotation_position="top left",
@@ -536,6 +537,11 @@ html.Div(dcc.Markdown('''
                         className="content-title"),
                 html.Div([
                 dcc.Markdown(''' _L’anxiété est mesurée par l’échelle HAD (Hospitality Anxiety and Depression scale ; score > 10)._''',className='content-paraf')]),
+                dcc.RadioItems(
+                        id='events',
+                        options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
+                                  {'label': 'Non', 'value': 'Non'}],
+                        value='Non'),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_anxiety,className="content-graph"),
                 dcc.Graph(id='bargraph2',
@@ -549,6 +555,11 @@ html.Div(dcc.Markdown('''
                         className="content-title"),
                 dcc.Markdown(''' _La dépression est mesurée par l’échelle HAD (Hospitality Anxiety 
                              and Depression scale ; score > 10._''', className='content-paraf'),
+                dcc.RadioItems(
+                        id='events2',
+                        options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
+                                  {'label': 'Non', 'value': 'Non'},                 
+                                  ]),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_depression,className="content-graph"),
                 dcc.Graph(id='bargraph2',
@@ -766,6 +777,56 @@ def update_figure(value):
 
     return fig, fig2, fig3
 
+@app.callback(
+    Output('bargraph1','figure'),
+    Input('events','value'))
+def annotation_figure(value):
+        fig5=line_graph_anxiety
+        if value == 'Evénements covid':
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x='23-25 mars', y=40,
+                text="1️⃣",
+                showarrow=False,
+                yshift=10)
+    
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x='13-15 mai', y=40,
+                    text="🤸‍",
+                    showarrow=False,
+                    yshift=10)
+        
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x='4-6 nov.', y=40,
+                    text="2️⃣",
+                    showarrow=False,
+                    yshift=10)
+        
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x=' 14-16 dec..', y=40,
+                    text="🤸‍",
+                    showarrow=False,
+                    yshift=10)
+        
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x=' 15-17 mars', y=40,
+                    text="3️⃣",
+                    showarrow=False,
+                    yshift=10)
+        
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x=' 17-19 mai', y=40,
+                    text="🤸‍",
+                    showarrow=False,
+                    yshift=10)
+        
+            fig5.add_annotation(font=dict(color="black",size=16),
+                                x=' 21-28 juin', y=40,
+                    text="💉",
+                    showarrow=False,
+                    yshift=10)
+        else:
+                fig5=line_graph_anxiety
+        return fig5 
 
 
 

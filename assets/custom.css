@@ -99,9 +99,11 @@ a {
 
 .content-warning {
   background: #f1effd;
+  margin-top: 5rem;
+   margin-bottom: 2rem;
    margin-left: 5rem;
    margin-right: 5rem;
-  padding: 8px;
+  padding: 50px;
   border: 14px 0px 0px 0px solid purple;
   font-style: normal;
   font-weight: normal;
@@ -165,9 +167,11 @@ a {
 }
 
 .box {
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 30px;
+  margin-top: 5rem;
+   margin-bottom: 2rem;
+   margin-left: 5rem;
+   margin-right: 5rem;
+  padding: 50px;
   border: 1px solid 	#F5F5F5;
   box-shadow: 6px 5px 21px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
