@@ -75,7 +75,8 @@ a {
 
 .content-title {
   padding-top:2rem;
-  width: 600px;
+  margin-left: 52px;
+  width: 800px;
   font-style: normal;
   font-weight: bold;
   font-size: calc(30px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
@@ -87,7 +88,7 @@ a {
 }
 
 .content-paraf {
-  margin-left: 10px;
+  margin-left: 5rem;
   margin-top: 20px;
   width: 600px;
   font-style: normal;

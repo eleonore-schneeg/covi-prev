@@ -825,7 +825,7 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                         id='events',
                         options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
                                   {'label': 'Non', 'value': 'Non'}],
-                        value='Non'),
+                        value='Non', className='content-paraf'),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_anxiety,className="content-graph"),
                 dcc.Graph(id='bargraph2',
@@ -846,7 +846,7 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                         id='events2',
                         options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
                                   {'label': 'Non', 'value': 'Non'},                 
-                                  ]),
+                                  ],className='content-paraf'),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_depression,className="content-graph"),
                 html.H4('Choisir une catégorie 🔎 :', className='content-paraf'),
@@ -857,7 +857,7 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                                   {'label': 'Risque covid', 'value': 'Risque covid'}],
                         value='Situation professionnelle',
                          placeholder='Sélectionner une catégorie',
-         style = {"width": "250px",'position': 'center','margin-left': 10,'margin-up': 10}
+         className='content-paraf'
          ),
                 dcc.Graph(id='animation1',
                          figure=socio_professionel_g,className="content-graph"),
@@ -918,7 +918,7 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
 
                 value=1,
                 placeholder='Select date',
-         style = {"width": "200px",'position': 'center','margin-left': 10}
+          className='content-paraf'
          ),
                 html.Div([
     dcc.Graph(id='graph-with-slider',className="content-graph"),
