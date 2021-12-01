@@ -40,7 +40,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
 import plotly.graph_objs as go
-import plotly.io as pio
+
 import geopandas as gpd
 from plotly.offline import plot
 import pandas as pd
@@ -51,22 +51,38 @@ from urllib.request import urlopen
 data = pd.read_csv('data/coviprev-age.csv',sep=';',decimal=',', encoding='utf-8')
 data['date']=data.semaine.str[10:]
 
+moyenne_age= pd.read_csv('data/moyenne_age.csv',sep=';',decimal=',', encoding='utf-8')
+
+moyenne_sexe= pd.read_csv('data/moyenne_sexe.csv',sep=';',decimal=',', encoding='utf-8')
+
+# interval de confiance 
+data['inf_anxiete']=data['anxiete']-data['anxiete_inf']
+data['sup_anxiete']=data['anxiete_sup']-data['anxiete']
+
+data['inf_depression']=data['depression']-data['depression_inf']
+data['sup_depression']=data['depression_sup']-data['depression']
+
+data['inf_pbsommeil']=data['pbsommeil']-data['pbsommeil_inf']
+data['sup_pbsommeil']=data['pbsommeil_sup']-data['pbsommeil']
 
 # ANXIETY
 # Create the line graph
 line_graph_anxiety = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data, title='<b>Évolution de symptômes dépressifs par âge durant les vagues Covid<b>', 
+  data_frame=moyenne_age, title="<b>Évolution de symptômes d'anxiété par âge durant les vagues Covid<b>", 
   # Set the x and y arguments
-  x='date', y='anxiete', 
+  x='année', y='anxiete', 
   # Ensure a separate line per age
   color='age',
   labels={'age':"Tranche d'âge",
-                     "date": 'Date',
+                     "année": 'Date',
                      "anxiete": "Individus déclarant des symptômes d'anxiété (%)"
                  },
   line_shape='spline',
-  color_discrete_sequence= px.colors.sequential.Agsunset)
+  color_discrete_sequence= px.colors.sequential.Agsunset,
+  #error_y_minus='inf_anxiete',
+  #error_y='sup_anxiete'
+  )
 
 
 line_graph_anxiety.update_layout(
@@ -98,6 +114,105 @@ line_graph_anxiety.add_annotation(dict(font=dict(color="black",size=10),
                            ))
 
 
+#### annotation
+
+line_graph_anxiety2 = px.line(
+  # Set the appropriate DataFrame and title
+  data_frame=moyenne_age, title="<b>Évolution de symptômes d'anxiété par âge durant les vagues Covid<b>", 
+  # Set the x and y arguments
+  x='année', y='anxiete', 
+  # Ensure a separate line per age
+  color='age',
+  labels={'age':"Tranche d'âge",
+                     "année": 'Date',
+                     "anxiete": "Individus déclarant des symptômes d'anxiété (%)"
+                 },
+  line_shape='spline',
+  color_discrete_sequence= px.colors.sequential.Agsunset,
+  #error_y_minus='inf_anxiete',
+  #error_y='sup_anxiete'
+  )
+
+
+line_graph_anxiety2.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b>Évolution de symptômes d'anxiété dans le contexte de l’épidémie de Covid-19 (Tranche d'âge)<b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+picker_style = {'float': 'left', 'margin': 'auto'}
+
+line_graph_anxiety2.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1,
+                            y=-1,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
+
+  
+line_graph_anxiety2.add_annotation(font=dict(color="black",size=16),
+                        x='avril 2020', y=40,
+        text="1️⃣",
+        showarrow=False,
+        yshift=10)
+
+
+line_graph_anxiety2.add_annotation(font=dict(color="black",size=16),
+                        x='novembre 2020', y=40,
+            text="2️⃣",
+            showarrow=False,
+            yshift=10)
+
+
+line_graph_anxiety2.add_annotation(font=dict(color="black",size=16),
+                        x='avril 2021', y=40,
+            text="3️⃣",
+            showarrow=False,
+            yshift=10)
+
+
+line_graph_anxiety2.add_annotation(font=dict(color="black",size=16),
+                        x='juillet 2021', y=40,
+            text="💉",
+            showarrow=False,
+            yshift=10)
+
+
+# line_graph_anxiety2.add_vrect(x0='23-25 mars', x1='13-15 mai', 
+#               annotation_text="Confinement 1", annotation_position="top left",
+#               fillcolor="blue", opacity=0.1, line_width=0)
+
+# line_graph_anxiety2.add_vrect(x0=' 4-6 nov.', x1=' 14-16 dec..', 
+#               annotation_text="Confinement 2", annotation_position="top left",
+#               fillcolor="blue", opacity=0.1, line_width=0)
+
+# line_graph_anxiety2.add_vrect(x0=' 15-17 mars', x1=' 17-19 mai', 
+#               annotation_text="Confinement 3", annotation_position="top left",
+#               fillcolor="blue", opacity=0.1, line_width=0)
+
+line_graph_anxiety2.add_vrect(x0='mars 2020', x1='mai 2020', 
+              fillcolor="blue", opacity=0.1, line_width=0)
+
+line_graph_anxiety2.add_vrect(x0='novembre 2020', x1='décembre 2020', 
+              fillcolor="blue", opacity=0.1, line_width=0)
+
+line_graph_anxiety2.add_vrect(x0='mars 2021', x1='mai 2021', 
+              fillcolor="blue", opacity=0.1, line_width=0)
+
+
 
 confinement_1=[	'Vague 1 : 23-25 mars',	'Vague 7 : 13-15 mai']
 confinement_2=[	'Vague 17 : 4-6 nov',	'Vague 19 : 14-16 dec']
@@ -108,13 +223,13 @@ confinement_3=[	'Vague 22 : 15-17 mars',	'Vague 24 : 17-19 mai']
 # Create the line graph
 line_graph_depression = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data[5:139], title='<b>Évolution de symptômes dépressifs par âge durant les vagues Covid<b>', 
+  data_frame=moyenne_age, title='<b>Évolution de symptômes dépressifs par âge durant les vagues Covid<b>', 
   # Set the x and y arguments
-  x='date', y='depression', 
+  x='année', y='depression', 
   # Ensure a separate line per age
   color='age',
   labels={'age':"Tranche d'âge",
-                     'date': 'Date',
+                     'année': 'Date',
                      "depression": "Individus déclarant des symptômes dépressifs (%)"
                  },
   line_shape='spline',
@@ -137,7 +252,10 @@ line_graph_depression.update_layout(
         'xanchor': 'center',
         'yanchor': 'top'
     },
+
 )
+
+line_graph_depression.update_xaxes(range=[1,18])
 
 picker_style = {'float': 'left', 'margin': 'auto'}
 
@@ -153,18 +271,17 @@ line_graph_depression.add_annotation(dict(font=dict(color="black",size=10),
 
 
 
-
 #SLEEP
 # Create the line graph
 line_graph_sleep = px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data[5:139], title='Évolution problèmes de sommeil par age', 
+  data_frame=moyenne_age, title='Évolution problèmes de sommeil par age', 
   # Set the x and y arguments
-  x='date', y='pbsommeil', 
+  x='année', y='pbsommeil', 
   # Ensure a separate line per country
   color='age',
    labels={'age':"Tranche d'âge",
-                     "date": "Date",
+                     "année": "Date",
                      "pbsommeil": "Individus déclarant des troubles du sommeil (%)"
                  },
   line_shape='spline',
@@ -178,7 +295,7 @@ line_graph_sleep.update_layout(
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
-    #yaxis_range=[0,100],
+    yaxis_range=[20,100],
         title={
         'text': "<b>Évolution des troubles du sommeil dans le contexte de l’épidémie de Covid-19 (Tranche d'âge)<b>",
         'y':0.95,
@@ -198,7 +315,7 @@ line_graph_sleep.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
-
+line_graph_sleep.update_xaxes(range=[1,18])
 
 #plot(line_graph_sleep)
 
@@ -210,13 +327,13 @@ data_sex['date']=data_sex.semaine.str[10:]
 # Create the line graph
 line_graph_sex_sommeil= px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data_sex[0:55], title='Evolution problèmes de sommeil par sexe', 
+  data_frame=moyenne_sexe, title='Evolution problèmes de sommeil par sexe', 
   # Set the x and y arguments
-  x='date', y='pbsommeil', 
+  x='année', y='pbsommeil', 
   # Ensure a separate line per country
   color='sexe',
    labels={'sexe':"Sexe",
-                     "date": "Date",
+                     "année": "Date",
                      "pbsommeil": "Individus déclarant des troubles du sommeil (%)"
                  },
   line_shape='spline',
@@ -230,7 +347,7 @@ line_graph_sex_sommeil.update_layout(
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
-        #yaxis_range=[0,100],
+        yaxis_range=[20,100],
         title={
         'text': "<b>Évolution des troubles du sommeil dans le contexte de l’épidémie de Covid-19 (Sexe)<b>",
         'y':0.95,
@@ -251,22 +368,27 @@ line_graph_sex_sommeil.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
+line_graph_sex_sommeil.update_xaxes(range=[1,18])
 
 
-line_graph_sex_depression= px.line(
+
+line_graph_sex_depression= px.scatter(
   # Set the appropriate DataFrame and title
-  data_frame=data_sex[0:55], title='Évolution problèmes de dépression par sexe', 
+  data_frame=moyenne_sexe, title='Évolution problèmes de dépression par sexe', 
   # Set the x and y arguments
-  x='date', y='depression', 
+  x='année', y='depression', 
    labels={'sexe':"Sexe",
-                     "date": "Date",
+                     "année": "Date",
                      "depression": "Individus déclarant des symptômes dépressifs (%)"
                  },
-  # Ensure a separate line per country
+  # Ensure a separate line per country,
   color='sexe',
-  line_shape='spline',
-  color_discrete_sequence= px.colors.sequential.Agsunset)
+  range_y=[10,25],
+  color_discrete_sequence= px.colors.qualitative.Pastel[2:4])
 
+
+line_graph_sex_depression.update_xaxes(range=[0,19])
+line_graph_sex_depression.update_traces(marker={'size': 15})
 
 line_graph_sex_depression.update_layout(
     font_color="darkblue",
@@ -299,11 +421,11 @@ line_graph_sex_depression.add_annotation(dict(font=dict(color="black",size=10),
 ####
 line_graph_sex_anxiete= px.line(
   # Set the appropriate DataFrame and title
-  data_frame=data_sex[0:55], title="Évolution problèmes d'anxiété' par sexe", 
+  data_frame=moyenne_sexe, title="Évolution problèmes d'anxiété' par sexe", 
   # Set the x and y arguments
-  x='date', y='anxiete', 
+  x='année', y='anxiete', 
    labels={'sexe':"Sexe",
-                     "date": "Date",
+                     "année": "Date",
                      "anxiete": "Individus déclarant des symptômes d'anxiété' (%)"
                  },
   # Ensure a separate line per country
@@ -346,22 +468,27 @@ line_graph_sex_anxiete.add_annotation(dict(font=dict(color="black",size=10),
 all_data = pd.read_csv('data/coviprev.csv',
                        sep=';',decimal=',',header= 0,
                         encoding='utf-8')
+annee = pd.read_csv('data/moyenne_annee.csv',
+                       sep=';',decimal=',',header= 0,
+                        encoding='utf-8')
 
 
 
-fig_all = px.line(all_data, x='semaine', y=['depression', 'anxiete',"pbsommeil"],
+fig_all = px.line(annee, x='année', y=['moyenne_depression', 'moyenne_anxiete',"moyenne_pbsommeil","moyenne_ps12mois"],
                     labels={
                     'variable':'Indicateurs',
-                     "semaine": "Semaine",
+                     "année": "Date",
                      "value": "Individus déclarant des symptômes (%)",
-                     'depression':'dépression',
-                     'anxiete':'anxiété',
-                     'pbsommeil':'troubles du sommeil'
+                     'moyenne_depression':'dépression',
+                     'moyenne_anxiete':'anxiété',
+                     'moyenne_pbsommeil':'problèmes de sommeil',
+                     'moyenne_ps12mois':'pensées suicidaires'
                  },line_shape='spline',
                     color_discrete_sequence= px.colors.sequential.Agsunset)
 
 fig_all.update_layout(
     font_color="darkblue",
+    font_family="Uber Move Medium",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
@@ -373,37 +500,37 @@ fig_all.update_layout(
         'xanchor': 'center',
         'yanchor': 'top'
     },
-       legend=dict(
-    orientation="v",
-    yanchor="bottom",
-    y=1.02,
-    xanchor="right",
-    x=1,
-))
+    #    legend=dict(
+    # orientation="v",
+    # yanchor="bottom",
+    # y=1.02,
+    # xanchor="right",
+    # x=1,)
+)
 
 
-fig_all.add_hline(y=18, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+fig_all.add_hline(y=9.8, line_dash="dot",
+              annotation_text="2017 baseline", 
               annotation_position="bottom right",line_color='rgb(75, 41, 145)',line_width=0.5)
-fig_all.add_hline(y=15, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+fig_all.add_hline(y=13.5, line_dash="dot",
+              annotation_text="2017 baseline", 
               annotation_position="bottom right",line_color= 'rgb(135, 44, 162)',line_width=0.5)
 
-fig_all.add_hline(y=60, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+fig_all.add_hline(y=49.4, line_dash="dot",
+              annotation_text="2017 baseline", 
               annotation_position="bottom right", line_color='rgb(192, 54, 157)', line_width=0.5)
 
 
 
-fig_all.add_vrect(x0='Vague 1 : 23-25 mars', x1='Vague 7 : 13-15 mai', 
+fig_all.add_vrect(x0='mars 2020', x1='mai 2020', 
               annotation_text="Confinement 1", annotation_position="top left",
               fillcolor="blue", opacity=0.1, line_width=0)
 
-fig_all.add_vrect(x0='Vague 17 : 4-6 nov', x1='Vague 19 : 14-16 dec..', 
+fig_all.add_vrect(x0='novembre 2020', x1='décembre 2020', 
               annotation_text="Confinement 2", annotation_position="top left",
               fillcolor="blue", opacity=0.1, line_width=0)
 
-fig_all.add_vrect(x0='Vague 22 : 15-17 mars', x1='Vague 24 : 17-19 mai', 
+fig_all.add_vrect(x0='mars 2021', x1='mai 2021', 
               annotation_text="Confinement 3", annotation_position="top left",
               fillcolor="blue", opacity=0.1, line_width=0)
 
@@ -443,7 +570,147 @@ df['vague']=df['vague'].astype(int)
 df['date']=df.semaine.str[10:]
 
 
-#######
+#######ANIMATIONS
+
+
+
+
+socio = pd.read_csv('data/depression_socio.csv')
+
+socio_sexe= pd.melt(socio, id_vars=['année'], value_vars=['Homme','Femme'],
+        var_name='sexe', value_name='Depression_sexe')
+
+socio_professionel= pd.melt(socio, id_vars=['année'], value_vars=["Travail","Etudes","Chômage","Retraite ","Inactif"],
+        var_name='situation_pro', value_name='Depression_professionel')
+
+socio_situation= pd.melt(socio, id_vars=['année'], value_vars=["En entreprise", "Au chômage partiel",
+                                                               "En arrêt de travail"],
+        var_name='situtation_pro2', value_name='Depression_situation')
+
+covid_risque= pd.melt(socio, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
+        var_name='risque', value_name='dep_risque_covid')
+
+covid_symptomes= pd.melt(socio, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
+        var_name='symptomes', value_name='dep_symptomes_covid')
+
+
+
+####1
+socio_professionel_g = px.bar(socio_professionel, x="situation_pro",y="Depression_professionel", animation_frame="année",
+            color="situation_pro", range_y=[0,50],
+            labels={'Depression_professionel':"Symptômes dépressifs (%)",
+                     "situation_pro": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+socio_professionel_g.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes dépressifs par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+#####
+
+
+covid_symptomes_g = px.bar(covid_symptomes, x="symptomes",y="dep_symptomes_covid", animation_frame="année",
+            color="symptomes", range_y=[0,50],
+            labels={'dep_symptomes_covid':"Symptômes dépressifs (%)",
+                     "symptomes": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_symptomes_g.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes dépressifs par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+####risque
+
+
+covid_risque_g = px.bar(covid_risque, x="risque",y="dep_risque_covid", animation_frame="année",
+            color="risque", range_y=[0,50],
+            labels={'dep_risque_covid':"Symptômes dépressifs (%)",
+                     "risque": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_risque_g.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes dépressifs par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+######
+#BASELINE
+
+comparison = pd.read_csv('data/comparison_baseline.csv')
+comparison=comparison[0:18]
+fig_comparison = px.bar(comparison, x="année", y=["comparison_depression","comparison_anxiete", "comparison_sommeil"],
+               labels={'value':"différence de points de %",
+                     "année": 'Date',
+                     'variable':'indicateurs'
+                 },
+               color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+
+
+fig_comparison.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b>Différence de points de pourcentage par rapport à 2017<b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+
+
+
+#####
 
 
 app = dash.Dash(__name__,external_stylesheets = [dbc.themes.BOOTSTRAP], suppress_callback_exceptions = True,
@@ -469,6 +736,7 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Accueil", href="/", active="exact",className="button"),
+                dbc.NavLink("Évolution", href="/page-00", active="exact",className="button"),
                 dbc.NavLink("Anxiété", href="/page-0", active="exact",className="button"),
                 dbc.NavLink("Dépression", href="/page-1", active="exact",className="button"),
                 dbc.NavLink("Sommeil", href="/page-2", active="exact",className="button"),
@@ -524,19 +792,35 @@ html.Div(dcc.Markdown('''
 * Questionnaires auto-administrés à remplir en ligne sur système Cawi (Computer Assisted Web Interview)
 * Echantillons de 2 000 personnes de 18 ans et plus résidant en France métropolitaine recrutés par access panel (Access Panel BVA)
 * Échantillonnage par quotas (sexe, âge, catégorie socio-professionnelles du répondant, région, catégorie d’agglomération) redressé sur le recensement général de la population 2016 
-''', className='box'), style={'display': 'inline-block', "width": "50%",'align-items': 'center','verticalAlign': 'top'})
-                 # dcc.Graph(id='bargraph0',
-                 #         figure=fig_all,
-                 #             style={'textAlign':'center','margin-left': 80,'width': '90%'}),
+''', className='box'), style={'display': 'inline-block', "width": "50%",'align-items': 'center','verticalAlign': 'top'}),
+                 
                 ])
              ]
+    elif pathname == "/page-00":
+        return [
+                html.H2("Évolutions des indicateurs depuis 2017",
+                        className="content-title"),
+                html.Div([
+    dcc.Markdown('''
+#### Comment peut-on mesurer l'évolution des indicateurs ?
+>
+> Différence de point de pourcentage entre une enqiuête de 2017 et l'enquête CoviPrev'
+                                                                
+_Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.santepubliquefrance.fr/etudes-et-enquetes/barometres-de-sante-publique-france/barometre-sante-2017)_''', className="content-warning")]),
+                dcc.Graph(id='evolution',
+                         figure=fig_comparison,className="content-graph"),
+                ]    
+                         
                        
     elif pathname == "/page-0":
         return [
                 html.H2("Prévalences de l'anxiété dans le contexte de l’épidémie de Covid-19",
                         className="content-title"),
                 html.Div([
-                dcc.Markdown(''' _L’anxiété est mesurée par l’échelle HAD (Hospitality Anxiety and Depression scale ; score > 10)._''',className='content-paraf')]),
+                dcc.Markdown(''' 
+                             ### Comment est mesurée l'anxiété dans l'enquête ?
+                             _L’anxiété est mesurée par l’échelle HAD (Hospitality Anxiety and Depression scale ; score > 10)._''',className="content-warning")]),
+                html.H4('Annoter le graphique avec les événements covid principaux 🖊️ :', className='content-paraf'),
                 dcc.RadioItems(
                         id='events',
                         options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
@@ -553,8 +837,11 @@ html.Div(dcc.Markdown('''
         return [
                 html.H2('Prévalences de la dépression dans le contexte de l’épidémie de Covid-19',
                         className="content-title"),
-                dcc.Markdown(''' _La dépression est mesurée par l’échelle HAD (Hospitality Anxiety 
-                             and Depression scale ; score > 10._''', className='content-paraf'),
+                dcc.Markdown('''
+                             ### Comment est mesurée la dépression dans l'enquête ?
+                             _La dépression est mesurée par l’échelle HAD (Hospitality Anxiety 
+                             and Depression scale ; score > 10._''', className="content-warning"),
+                html.H4('Annoter le graphique avec les événements covid principaux 🖊️ :', className='content-paraf'),
                 dcc.RadioItems(
                         id='events2',
                         options=[{'label': 'Evénements covid', 'value': 'Evénements covid'},
@@ -562,17 +849,33 @@ html.Div(dcc.Markdown('''
                                   ]),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_depression,className="content-graph"),
+                html.H4('Choisir une catégorie 🔎 :', className='content-paraf'),
+                 dcc.Dropdown(
+                        id='situation',
+                        options=[{'label': 'Situation professionnelle', 'value': 'Situation professionnelle'},
+                                  {'label': 'Symptômes COVID-19', 'value': 'symptômes COVID-19'},
+                                  {'label': 'Risque covid', 'value': 'Risque covid'}],
+                        value='Situation professionnelle',
+                         placeholder='Sélectionner une catégorie',
+         style = {"width": "250px",'position': 'center','margin-left': 10,'margin-up': 10}
+         ),
+                dcc.Graph(id='animation1',
+                         figure=socio_professionel_g,className="content-graph"),
                 dcc.Graph(id='bargraph2',
-                         figure=line_graph_sex_depression,className="content-graph")
+                         figure=line_graph_sex_depression,className="content-graph"),
+                
                 ]
     elif pathname == "/page-2":
         return [
                 html.H2('Prévalences des problèmes de sommeil dans le contexte de l’épidémie de Covid-19',
                         className="content-title"),
-                dcc.Markdown('''_La question posée était « Diriez-vous qu’au cours des 8 derniers jours, 
+                dcc.Markdown('''
+                             ### Comment sont mesurés les troubles du sommeil dans l'enquête ?
+                             _La question posée était « Diriez-vous qu’au cours des 8 derniers jours, 
                              vous avez eu des problèmes de sommeil… ? ». Les personnes ayant répondu "un peu" 
                              ou "beaucoup" à la question ont été considérées 
-                             comme ayant des problèmes de sommeil._''', className='content-paraf'),
+                             comme ayant des problèmes de sommeil._''', className="content-warning"),
+                html.H4('Annoter le graphique avec les événements covid principaux 🖊️ :', className='content-paraf'),
                 dcc.Graph(id='bargraph3',
                          figure=line_graph_sleep,className="content-graph"),
                 dcc.Graph(id='bargraph4',
@@ -781,52 +1084,31 @@ def update_figure(value):
     Output('bargraph1','figure'),
     Input('events','value'))
 def annotation_figure(value):
-        fig5=line_graph_anxiety
-        if value == 'Evénements covid':
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x='23-25 mars', y=40,
-                text="1️⃣",
-                showarrow=False,
-                yshift=10)
+
+    fig4=line_graph_anxiety
+    fig5=line_graph_anxiety2
+  
+        
+    if value == 'Evénements covid':
+        return fig5
     
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x='13-15 mai', y=40,
-                    text="🤸‍",
-                    showarrow=False,
-                    yshift=10)
+    else:                   
+        return fig4
+
+@app.callback(
+    Output('animation1','figure'),
+    Input('situation','value'))
+def annotation_figure(value):
         
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x='4-6 nov.', y=40,
-                    text="2️⃣",
-                    showarrow=False,
-                    yshift=10)
-        
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x=' 14-16 dec..', y=40,
-                    text="🤸‍",
-                    showarrow=False,
-                    yshift=10)
-        
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x=' 15-17 mars', y=40,
-                    text="3️⃣",
-                    showarrow=False,
-                    yshift=10)
-        
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x=' 17-19 mai', y=40,
-                    text="🤸‍",
-                    showarrow=False,
-                    yshift=10)
-        
-            fig5.add_annotation(font=dict(color="black",size=16),
-                                x=' 21-28 juin', y=40,
-                    text="💉",
-                    showarrow=False,
-                    yshift=10)
-        else:
-                fig5=line_graph_anxiety
-        return fig5 
+    if value == 'Situation professionnelle':
+        return socio_professionel_g
+    
+    if value == 'Risque covid':
+    
+        return covid_risque_g
+    
+    else:                   
+        return covid_symptomes_g
 
 
 
@@ -835,5 +1117,5 @@ if __name__=='__main__':
     app.run_server(debug=True)
     
     
-    
+
     
