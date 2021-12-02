@@ -325,7 +325,7 @@ data_sex['date']=data_sex.semaine.str[10:]
 
 
 # Create the line graph
-line_graph_sex_sommeil= px.line(
+line_graph_sex_sommeil= px.scatter(
   # Set the appropriate DataFrame and title
   data_frame=moyenne_sexe, title='Evolution problèmes de sommeil par sexe', 
   # Set the x and y arguments
@@ -336,8 +336,7 @@ line_graph_sex_sommeil= px.line(
                      "année": "Date",
                      "pbsommeil": "Individus déclarant des troubles du sommeil (%)"
                  },
-  line_shape='spline',
-  color_discrete_sequence= px.colors.sequential.Agsunset)
+  color_discrete_sequence= px.colors.qualitative.Pastel[2:4])
 
 
 line_graph_sex_sommeil.update_layout(
@@ -419,7 +418,7 @@ line_graph_sex_depression.add_annotation(dict(font=dict(color="black",size=10),
 
 
 ####
-line_graph_sex_anxiete= px.line(
+line_graph_sex_anxiete= px.scatter(
   # Set the appropriate DataFrame and title
   data_frame=moyenne_sexe, title="Évolution problèmes d'anxiété' par sexe", 
   # Set the x and y arguments
@@ -430,8 +429,7 @@ line_graph_sex_anxiete= px.line(
                  },
   # Ensure a separate line per country
   color='sexe',
-  line_shape='spline',
-  color_discrete_sequence= px.colors.sequential.Agsunset)
+  color_discrete_sequence= px.colors.qualitative.Pastel[2:4])
 
 
 line_graph_sex_anxiete.update_layout(
@@ -677,6 +675,225 @@ covid_risque_g.update_layout(
     },
 )
 ######
+
+#######ANIMATIONS anxiete
+
+
+
+
+socioa = pd.read_csv('data/anxiete-sociodemographie.csv', sep=';',decimal=',', encoding='utf-8')
+
+socioa_sexe= pd.melt(socioa, id_vars=['année'], value_vars=['Homme','Femme'],
+        var_name='sexe', value_name='Anxiete_sexe')
+
+socioa_professionel= pd.melt(socioa, id_vars=['année'], value_vars=["Travail","Etudes","Chômage","Retraite","Inactif"],
+        var_name='situation_pro', value_name='Anxiete_professionel')
+
+socioa_situation= pd.melt(socioa, id_vars=['année'], value_vars=["En entreprise", "Au chômage partiel",
+                                                               "En arrêt de travail"],
+        var_name='situtation_pro2', value_name='Anxiete_situation')
+
+covid_risquea= pd.melt(socioa, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
+        var_name='risque', value_name='anxiete_risque_covid')
+
+covid_symptomesa= pd.melt(socio, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
+        var_name='symptomes', value_name='anxiete_symptomes_covid')
+
+
+
+####1
+socio_professionel_ga = px.bar(socioa_professionel, x="situation_pro",y="Anxiete_professionel", animation_frame="année",
+            color="situation_pro", range_y=[0,50],
+            labels={'Anxiete_professionel':"Symptômes anxieux (%)",
+                     "situation_pro": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+socio_professionel_ga.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes anxieux par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+#####
+
+
+covid_symptomes_ga = px.bar(covid_symptomesa, x="symptomes",y="anxiete_symptomes_covid", animation_frame="année",
+            color="symptomes", range_y=[0,50],
+            labels={'anxiete_symptomes_covid':"Symptômes anxieux (%)",
+                     "symptomes": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_symptomes_ga.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes anxieux par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+####risque
+
+
+covid_risque_ga = px.bar(covid_risquea, x="risque",y="anxiete_risque_covid", animation_frame="année",
+            color="risque", range_y=[0,50],
+            labels={'anxiete_risque_covid':"Symptômes anxieux (%)",
+                     "risque": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_risque_ga.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des symptomes anxieux par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+######
+
+
+
+socios = pd.read_csv('data/sommeil-socio.csv',sep=';',decimal=',', encoding='utf-8')
+
+socios_sexe= pd.melt(socios, id_vars=['année'], value_vars=['Homme','Femme'],
+        var_name='sexe', value_name='Sommeil_sexe')
+
+socios_professionel= pd.melt(socios, id_vars=['année'], value_vars=["Travail","Etudes","Chômage","Retraite","Inactif"],
+        var_name='situation_pro', value_name='Sommeil_professionel')
+
+socios_situation= pd.melt(socios, id_vars=['année'], value_vars=["En entreprise", "Au chômage partiel",
+                                                               "En arrêt de travail"],
+        var_name='situtation_pro2', value_name='Sommeil_situation')
+
+covid_risques= pd.melt(socioa, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
+        var_name='risque', value_name='Sommeil_risque_covid')
+
+covid_symptomess= pd.melt(socio, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
+        var_name='symptomes', value_name='Sommeil_symptomes_covid')
+
+
+
+####1
+socio_professionel_gs = px.bar(socios_professionel, x="situation_pro",y="Sommeil_professionel", animation_frame="année",
+            color="situation_pro", range_y=[0,50],
+            labels={'Sommeil_professionel':"Troubles du sommeil (%)",
+                     "situation_pro": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+socio_professionel_gs.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des troubles du sommeil par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+#####
+
+
+covid_symptomes_gs = px.bar(covid_symptomess, x="symptomes",y="Sommeil_symptomes_covid", animation_frame="année",
+            color="symptomes", range_y=[0,50],
+            labels={'Sommeil_symptomes_covid':"Troubles du sommeil (%)",
+                     "symptomes": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_symptomes_gs.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des troubles du sommeil par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+####risque
+
+
+covid_risque_gs = px.bar(covid_risques, x="risque",y="Sommeil_risque_covid", animation_frame="année",
+            color="risque", range_y=[0,50],
+            labels={'Sommeil_risque_covid':"Troubles du sommeil (%)",
+                     "risque": 'Catégorie',
+                     "année":"Date"
+                 },
+            color_discrete_sequence= px.colors.sequential.Agsunset)
+
+
+covid_risque_gs.update_layout(
+    font_color="darkblue",
+    title_font_color="darkblue",
+    font_family="Uber Move Medium",
+    legend_title_font_color="darkblue",
+    font_size=12,
+    plot_bgcolor='#ffffff',
+    title={
+        'text': "<b> Individus déclarant des troubles du sommeil par situation professionnelle <b>",
+        'y':0.95,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+)
+
+
+
+
+
+
+#####
 #BASELINE
 
 comparison = pd.read_csv('data/comparison_baseline.csv')
@@ -828,6 +1045,18 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                         value='Non', className='content-paraf'),
                 dcc.Graph(id='bargraph1',
                          figure=line_graph_anxiety,className="content-graph"),
+                 html.H4('Choisir une catégorie 🔎 :', className='content-paraf'),
+                 dcc.Dropdown(
+                        id='situation',
+                        options=[{'label': 'Situation professionnelle', 'value': 'Situation professionnelle'},
+                                  {'label': 'Symptômes COVID-19', 'value': 'symptômes COVID-19'},
+                                  {'label': 'Risque covid', 'value': 'Risque covid'}],
+                        value='Situation professionnelle',
+                         placeholder='Sélectionner une catégorie',
+         className='content-paraf'
+         ),
+                dcc.Graph(id='animation2',
+                         figure=socio_professionel_g,className="content-graph"),
                 dcc.Graph(id='bargraph2',
                          figure=line_graph_sex_anxiete,className="content-graph")
                 
@@ -878,6 +1107,18 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                 html.H4('Annoter le graphique avec les événements covid principaux 🖊️ :', className='content-paraf'),
                 dcc.Graph(id='bargraph3',
                          figure=line_graph_sleep,className="content-graph"),
+                 html.H4('Choisir une catégorie 🔎 :', className='content-paraf'),
+                 dcc.Dropdown(
+                        id='situation',
+                        options=[{'label': 'Situation professionnelle', 'value': 'Situation professionnelle'},
+                                  {'label': 'Symptômes COVID-19', 'value': 'symptômes COVID-19'},
+                                  {'label': 'Risque covid', 'value': 'Risque covid'}],
+                        value='Situation professionnelle',
+                         placeholder='Sélectionner une catégorie',
+         className='content-paraf'
+         ),
+                dcc.Graph(id='animation3',
+                         figure=socio_professionel_g,className="content-graph"),
                 dcc.Graph(id='bargraph4',
                          figure=line_graph_sex_sommeil,className="content-graph")
                 ]
@@ -913,7 +1154,7 @@ _Baromètre de Santé publique France 2017 (BSpF)[ Disponible ici](https://www.s
                     {"label": '17-19 mai 2021', "value": 24},
                     {"label": '21-28 juin 2021', "value": 25},
                     {"label": '15-21 juillet 2021', "value": 26},
-                    {"label": '32 août-7 sept 2021', "value": 27},
+                    {"label": '31 août-7 sept 2021', "value": 27},
                     {"label": '28 sept- 5 oct 2021', "value": 28}],
 
                 value=1,
@@ -1110,7 +1351,35 @@ def annotation_figure(value):
     else:                   
         return covid_symptomes_g
 
+@app.callback(
+    Output('animation2','figure'),
+    Input('situation','value'))
+def annotation_figure(value):
+        
+    if value == 'Situation professionnelle':
+        return socio_professionel_ga
+    
+    if value == 'Risque covid':
+    
+        return covid_risque_ga
+    
+    else:                   
+        return covid_symptomes_ga
 
+@app.callback(
+    Output('animation3','figure'),
+    Input('situation','value'))
+def annotation_figure(value):
+        
+    if value == 'Situation professionnelle':
+        return socio_professionel_gs
+    
+    if value == 'Risque covid':
+    
+        return covid_risque_gs
+    
+    else:                   
+        return covid_symptomes_gs
 
 
 if __name__=='__main__':
