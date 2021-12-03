@@ -294,7 +294,7 @@ socio_professionel_gs.write_html(file='graphs/sommeil/sommeil_bar_socio_pro.html
 
 
 covid_symptomes_gs = px.bar(covid_symptomess, x="symptomes",y="Sommeil_symptomes_covid", animation_frame="année",
-            color="symptomes", range_y=[0,50],
+            color="symptomes", range_y=[40,85],
             labels={'Sommeil_symptomes_covid':"Troubles du sommeil (%)",
                      "symptomes": 'Catégorie',
                      "année":"Date"
@@ -323,7 +323,7 @@ covid_symptomes_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_symptomes.h
 
 
 covid_risque_gs = px.bar(covid_risques, x="risque",y="Sommeil_risque_covid", animation_frame="année",
-            color="risque", range_y=[0,50],
+            color="risque",range_y=[40,85],
             labels={'Sommeil_risque_covid':"Troubles du sommeil (%)",
                      "risque": 'Catégorie',
                      "année":"Date"
