@@ -681,7 +681,7 @@ covid_risque_g.update_layout(
 
 
 
-socioa = pd.read_csv('data/anxiete-sociodemographie.csv', sep=';',decimal=',', encoding='utf-8')
+socioa = pd.read_csv('data/anxiete-socio.csv', sep=';',decimal=',', encoding='utf-8')
 
 socioa_sexe= pd.melt(socioa, id_vars=['année'], value_vars=['Homme','Femme'],
         var_name='sexe', value_name='Anxiete_sexe')
@@ -696,7 +696,7 @@ socioa_situation= pd.melt(socioa, id_vars=['année'], value_vars=["En entreprise
 covid_risquea= pd.melt(socioa, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
         var_name='risque', value_name='anxiete_risque_covid')
 
-covid_symptomesa= pd.melt(socio, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
+covid_symptomesa= pd.melt(socioa, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
         var_name='symptomes', value_name='anxiete_symptomes_covid')
 
 
@@ -798,17 +798,17 @@ socios_situation= pd.melt(socios, id_vars=['année'], value_vars=["En entreprise
                                                                "En arrêt de travail"],
         var_name='situtation_pro2', value_name='Sommeil_situation')
 
-covid_risques= pd.melt(socioa, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
+covid_risques= pd.melt(socios, id_vars=['année'], value_vars=["risque_covid_non","risque_covid_oui"],
         var_name='risque', value_name='Sommeil_risque_covid')
 
-covid_symptomess= pd.melt(socio, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
+covid_symptomess= pd.melt(socios, id_vars=['année'], value_vars=["symptomes_non","symptomes_oui"],
         var_name='symptomes', value_name='Sommeil_symptomes_covid')
 
 
 
 ####1
 socio_professionel_gs = px.bar(socios_professionel, x="situation_pro",y="Sommeil_professionel", animation_frame="année",
-            color="situation_pro", range_y=[0,50],
+            color="situation_pro", range_y=[40,80],
             labels={'Sommeil_professionel':"Troubles du sommeil (%)",
                      "situation_pro": 'Catégorie',
                      "année":"Date"
