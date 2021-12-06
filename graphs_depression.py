@@ -75,7 +75,7 @@ line_graph_depression.update_yaxes(range=[0, 40])
 line_graph_depression.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -129,7 +129,7 @@ line_graph_depression2.update_yaxes(range=[0, 40])
 line_graph_depression2.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -229,7 +229,7 @@ line_graph_sex_depression.update_traces(marker={'size': 15})
 line_graph_sex_depression.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -253,7 +253,7 @@ line_graph_sex_depression.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
-line_graph_sex_depression.write_html(file='graphs/depression/depression_sexe.html')
+line_graph_sex_depression.write_html(file='graphs/depression/depression_sexe.html',auto_play=False)
 
 ##### ANIMATIONS
 
@@ -270,7 +270,7 @@ socio_professionel_g = px.bar(socio_professionel, x="situation_pro",y="Depressio
 socio_professionel_g.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -283,7 +283,17 @@ socio_professionel_g.update_layout(
     },
 )
 
-socio_professionel_g.write_html(file='graphs/depression/depression_bar_socio_pro.html')
+socio_professionel_g.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
+
+socio_professionel_g.write_html(file='graphs/depression/depression_bar_socio_pro.html',auto_play=False)
 #####
 
 
@@ -299,7 +309,7 @@ covid_symptomes_g = px.bar(covid_symptomes, x="symptomes",y="dep_symptomes_covid
 covid_symptomes_g.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -312,6 +322,15 @@ covid_symptomes_g.update_layout(
     },
 )
 
+covid_symptomes_g.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
 
 covid_symptomes_g.write_html(file='graphs/depression/depression_bar_covid_symptomes.html')
 ####risque
@@ -329,7 +348,7 @@ covid_risque_g = px.bar(covid_risque, x="risque",y="dep_risque_covid", animation
 covid_risque_g.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -342,5 +361,15 @@ covid_risque_g.update_layout(
     },
 )
 
-covid_risque_g.write_html(file='graphs/depression/depression_bar_covid_risque.html')
+covid_risque_g.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
+
+covid_risque_g.write_html(file='graphs/depression/depression_bar_covid_risque.html',auto_play=False)
 ######

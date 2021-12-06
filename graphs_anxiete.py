@@ -81,7 +81,7 @@ line_graph_anxiety = px.line(
 line_graph_anxiety.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -131,7 +131,7 @@ line_graph_anxiety2 = px.line(
 line_graph_anxiety2.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -218,7 +218,7 @@ line_graph_sex_anxiete= px.scatter(
 line_graph_sex_anxiete.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -250,7 +250,7 @@ line_graph_sex_anxiete.write_html(file='graphs/anxiete/anxiete_sexe.html')
 
 ####1
 socio_professionel_ga = px.bar(socioa_professionel, x="situation_pro",y="Anxiete_professionel", animation_frame="année",
-            color="situation_pro", range_y=[0,50],
+            animation_group="situation_pro",color="situation_pro", range_y=[0,50],
             labels={'Anxiete_professionel':"Symptômes anxieux (%)",
                      "situation_pro": 'Catégorie',
                      "année":"Date"
@@ -261,7 +261,7 @@ socio_professionel_ga = px.bar(socioa_professionel, x="situation_pro",y="Anxiete
 socio_professionel_ga.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -272,10 +272,25 @@ socio_professionel_ga.update_layout(
         'xanchor': 'center',
         'yanchor': 'top'
     },
+    transition= {'duration':1 }
 )
 
+socio_professionel_ga.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
 
-socio_professionel_ga.write_html(file='graphs/anxiete/anxiete_bar_socio_pro.html')
+
+socio_professionel_ga.write_html(file='graphs/anxiete/anxiete_bar_socio_pro.html', auto_play=False)
+
+import plotly.io as pio
+pio.write_html(socio_professionel_ga, file='graphs/anxiete/index.html',auto_play=False)
+
 #####
 
 
@@ -291,7 +306,7 @@ covid_symptomes_ga = px.bar(covid_symptomesa, x="symptomes",y="anxiete_symptomes
 covid_symptomes_ga.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -304,8 +319,17 @@ covid_symptomes_ga.update_layout(
     },
 )
 
+covid_symptomes_ga.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
 
-covid_symptomes_ga.write_html(file='graphs/anxiete/anxiete_bar_covid_symptomes.html')
+covid_symptomes_ga.write_html(file='graphs/anxiete/anxiete_bar_covid_symptomes.html',auto_play=False)
 
 ####risque
 
@@ -322,7 +346,7 @@ covid_risque_ga = px.bar(covid_risquea, x="risque",y="anxiete_risque_covid", ani
 covid_risque_ga.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -336,5 +360,15 @@ covid_risque_ga.update_layout(
 )
 
 
-covid_risque_ga.write_html(file='graphs/anxiete/anxiete_bar_covid_risque.html')
+covid_risque_ga.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
+
+covid_risque_ga.write_html(file='graphs/anxiete/anxiete_bar_covid_risque.html',auto_play=False)
 ######

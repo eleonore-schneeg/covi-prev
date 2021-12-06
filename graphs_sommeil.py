@@ -75,7 +75,7 @@ line_graph_sleep = px.line(
 line_graph_sleep.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -124,7 +124,7 @@ line_graph_sleep2 = px.line(
 line_graph_sleep2.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     yaxis_range=[40,90],
     font_size=12,
@@ -230,7 +230,7 @@ line_graph_sex_sommeil.update_traces(marker={'size': 15})
 line_graph_sex_sommeil.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     yaxis_range=[50,80],
     font_size=12,
@@ -275,7 +275,7 @@ socio_professionel_gs = px.bar(socios_professionel, x="situation_pro",y="Sommeil
 socio_professionel_gs.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -287,6 +287,16 @@ socio_professionel_gs.update_layout(
         'yanchor': 'top'
     },
 )
+
+socio_professionel_gs.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
 
 socio_professionel_gs.write_html(file='graphs/sommeil/sommeil_bar_socio_pro.html')
 
@@ -305,7 +315,7 @@ covid_symptomes_gs = px.bar(covid_symptomess, x="symptomes",y="Sommeil_symptomes
 covid_symptomes_gs.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -317,6 +327,17 @@ covid_symptomes_gs.update_layout(
         'yanchor': 'top'
     },
 )
+
+covid_symptomes_gs.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
+
 covid_symptomes_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_symptomes.html')
 
 ####risque
@@ -334,7 +355,7 @@ covid_risque_gs = px.bar(covid_risques, x="risque",y="Sommeil_risque_covid", ani
 covid_risque_gs.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -346,6 +367,17 @@ covid_risque_gs.update_layout(
         'yanchor': 'top'
     },
 )
+
+
+covid_risque_gs.add_annotation(dict(font=dict(color="black",size=10),
+                            x=1.1,
+                            y=-0.31,
+                            showarrow=False,
+                            text='<b>Source: Hippo.vision 🦛 </b>',
+                            textangle=0,
+                            xref="x domain",
+                            yref="y domain"
+                           ))
 
 
 covid_risque_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_risque.html')
