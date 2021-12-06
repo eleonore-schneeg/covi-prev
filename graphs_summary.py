@@ -49,7 +49,7 @@ fig_comparison = px.bar(comparison, x="année", y=["comparison_depression","comp
 fig_comparison.update_layout(
     font_color="darkblue",
     title_font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     legend_title_font_color="darkblue",
     font_size=12,
     plot_bgcolor='#ffffff',
@@ -81,7 +81,7 @@ fig_all = px.line(annee, x='année', y=['moyenne_depression', 'moyenne_anxiete',
 
 fig_all.update_layout(
     font_color="darkblue",
-    font_family="Uber Move Medium",
+    font_family="verdana",
     title_font_color="darkblue",
     legend_title_font_color="darkblue",
     font_size=12,
