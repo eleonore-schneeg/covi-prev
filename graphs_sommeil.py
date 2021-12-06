@@ -298,7 +298,7 @@ socio_professionel_gs.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
-socio_professionel_gs.write_html(file='graphs/sommeil/sommeil_bar_socio_pro.html')
+socio_professionel_gs.write_html(file='graphs/sommeil/sommeil_bar_socio_pro.html', auto_play=False)
 
 #####
 
@@ -338,7 +338,7 @@ covid_symptomes_gs.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
-covid_symptomes_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_symptomes.html')
+covid_symptomes_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_symptomes.html', auto_play=False)
 
 ####risque
 
@@ -380,4 +380,4 @@ covid_risque_gs.add_annotation(dict(font=dict(color="black",size=10),
                            ))
 
 
-covid_risque_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_risque.html')
+covid_risque_gs.write_html(file='graphs/sommeil/sommeil_bar_covid_risque.html', auto_play=False)
