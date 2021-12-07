@@ -311,7 +311,7 @@ covid_symptomes_ga.update_layout(
     font_size=12,
     plot_bgcolor='#ffffff',
     title={
-        'text': "<b> Individus déclarant des symptomes anxieux par situation professionnelle <b>",
+        'text': "<b> Individus présentant un risque de développer une forme grave de COVID-19 déclarant des symptomes anxieux <b>",
         'y':0.95,
         'x':0.5,
         'xanchor': 'center',
@@ -351,7 +351,7 @@ covid_risque_ga.update_layout(
     font_size=12,
     plot_bgcolor='#ffffff',
     title={
-        'text': "<b> Individus déclarant des symptomes anxieux par situation professionnelle <b>",
+        'text': "<b> Individus ayant ou ayant eu des symptômes COVID et déclarant des symptomes d'anxiété <b>",
         'y':0.95,
         'x':0.5,
         'xanchor': 'center',

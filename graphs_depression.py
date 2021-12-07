@@ -314,13 +314,16 @@ covid_symptomes_g.update_layout(
     font_size=12,
     plot_bgcolor='#ffffff',
     title={
-        'text': "<b> Individus déclarant des symptomes dépressifs par situation professionnelle <b>",
+        'text': "<b> Individus présentant un risque de développer une forme grave de COVID-19 déclarant des symptomes dépressifs <b>",
         'y':0.95,
         'x':0.5,
         'xanchor': 'center',
         'yanchor': 'top'
     },
 )
+
+
+
 
 covid_symptomes_g.add_annotation(dict(font=dict(color="black",size=10),
                             x=1.1,
@@ -332,7 +335,7 @@ covid_symptomes_g.add_annotation(dict(font=dict(color="black",size=10),
                             yref="y domain"
                            ))
 
-covid_symptomes_g.write_html(file='graphs/depression/depression_bar_covid_symptomes.html')
+covid_symptomes_g.write_html(file='graphs/depression/depression_bar_covid_symptomes.html',auto_play=False)
 ####risque
 
 
@@ -353,7 +356,7 @@ covid_risque_g.update_layout(
     font_size=12,
     plot_bgcolor='#ffffff',
     title={
-        'text': "<b> Individus déclarant des symptomes dépressifs par situation professionnelle <b>",
+        'text': "<b> Individus ayant ou ayant eu des symptômes COVID et déclarant des symptomes dépressifs <b>",
         'y':0.95,
         'x':0.5,
         'xanchor': 'center',
