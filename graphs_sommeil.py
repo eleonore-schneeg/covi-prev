@@ -277,7 +277,7 @@ socio_professionel_gs.update_layout(
     title_font_color="darkblue",
     font_family="verdana",
     legend_title_font_color="darkblue",
-    font_size=12,
+    font_size=10,
     plot_bgcolor='#ffffff',
     title={
         'text': "<b> Individus déclarant des troubles du sommeil par situation professionnelle <b>",
@@ -317,7 +317,7 @@ covid_symptomes_gs.update_layout(
     title_font_color="darkblue",
     font_family="verdana",
     legend_title_font_color="darkblue",
-    font_size=12,
+    font_size=10,
     plot_bgcolor='#ffffff',
     title={
         'text': "<b> Individus présentant un risque de développer une forme grave de COVID-19 déclarant des troubles du sommeil <b>",
@@ -357,7 +357,7 @@ covid_risque_gs.update_layout(
     title_font_color="darkblue",
     font_family="verdana",
     legend_title_font_color="darkblue",
-    font_size=12,
+    font_size=10,
     plot_bgcolor='#ffffff',
     title={
         'text': "<b> Individus ayant ou ayant eu des symptômes COVID et déclarant des troubles du sommeil <b>",
